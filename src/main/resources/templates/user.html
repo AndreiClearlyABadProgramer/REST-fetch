@@ -8,14 +8,15 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script type="text/javascript" src="/webjars/jquery/3.4.1/jquery.min.js"></script>
     <script type="text/javascript" src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script type="text/javascript" th:src="@{/actions.js}" ></script>
     <title>admin panel</title>
 </head>
 <body>
 <nav class="navbar fixed-top navbar-dark bg-dark">
     <span class="navbar-text">
-        <a class="font-weight-bold" th:text="${user.email}"></a>
+        <a class="font-weight-bold" id="user_email"></a>
             <a> with roles: </a>
-        <a th:text="${user.roleGetter()}"></a>
+        <a id="user_roles"></a>
     </span>
     <span class="navbar-text">
       <a th:href="@{/logout}">Logout</a>
@@ -44,25 +45,16 @@
                             <table class="table table-striped">
                                 <thead>
                                 <tr>
-                                <tr>
-                                    <th>ID</th>
+                             <th>ID</th>
                                     <th>First Name</th>
                                     <th>Last Name</th>
                                     <th>Age</th>
                                     <th>Email</th>
                                     <th>Roles</th>
                                 </tr>
-                                </tr>
                                 </thead>
-                                <tbody>
-                                <tr th:each="user, state: ${user}">
-                                    <td th:utext="${user.id}">ID</td>
-                                    <td th:utext="${user.name}">First Name</td>
-                                    <td th:utext="${user.lastName}">Last Name</td>
-                                    <td th:utext="${user.age}">Age</td>
-                                    <td th:utext="${user.email}">Email</td>
-                                    <td th:utext="${user.roleGetter()}">Roles</td>
-                                </tr>
+                                <tbody id="user-info">
+
                                 </tbody>
                             </table>
                         </div>
