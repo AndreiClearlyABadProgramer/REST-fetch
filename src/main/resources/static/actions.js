@@ -35,6 +35,7 @@ $('document').ready(function (){
     $('#editForm #editButton').on('click', function (event){
         event.preventDefault();
         let user = {
+            id: $('#editId').val(),
             name: $('#editName').val(),
             lastName: $('#editLastName').val(),
             age: $('#editAge').val(),
@@ -55,7 +56,7 @@ $('document').ready(function (){
 
 
 function deleteData() {
-    fetch('/api/delete', {
+    fetch('/api/delete/' + document.getElementById('deleteId').value, {
         method: 'delete'
     }).then(() => list() );
 }

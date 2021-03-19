@@ -41,18 +41,14 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public void updateUser(User user) {
-        user.setId(user.getId());
         entityManager.merge(user);
     }
 
     @Override
     public List<User> userList() {
-        try {
-            List<User> users = entityManager.createQuery("select distinct user from User user join fetch user.roles").getResultList();
-            return users;
-        }catch (NullPointerException e) {
-            return new ArrayList<>();
-        }
+        List<User> users = entityManager.createQuery("select distinct user from User user join fetch user.roles").getResultList();
+        return users;
+
     }
 
     @Override
@@ -68,8 +64,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public Role getRoleById(Long id) {
-        Role role = entityManager.find(Role.class, id);
-        return role;
+        return entityManager.find(Role.class, id);
     }
 
 }
