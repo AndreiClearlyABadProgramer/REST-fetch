@@ -13,7 +13,7 @@ import java.util.List;
 @RestController
 public class RestAPIController {
 
-    ResponseEntity<?> re;
+    private ResponseEntity<?> re;
 
     @Autowired
     private final UserService userService;
