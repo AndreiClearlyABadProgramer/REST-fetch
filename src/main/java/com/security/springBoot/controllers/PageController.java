@@ -23,8 +23,8 @@ public class PageController {
     @GetMapping("/admin")
     public String adminPage(Model model) {
         List<Role> roles = new ArrayList<>();
-        roles.add(userService.getRoleById(1L));
-        roles.add(userService.getRoleById(2L));
+		roles.add(new Role("ROLE_USER"));
+		roles.add(new Role("ROLE_ADMIN"));
         model.addAttribute("roleList", roles);
         return "admin";
     }
