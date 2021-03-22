@@ -13,13 +13,6 @@ import java.util.List;
 @Controller
 public class PageController {
 
-    final
-    UserService userService;
-
-    public PageController(UserService userService) {
-        this.userService = userService;
-    }
-
     @GetMapping("/admin")
     public String adminPage(Model model) {
         List<Role> roles = new ArrayList<>();
