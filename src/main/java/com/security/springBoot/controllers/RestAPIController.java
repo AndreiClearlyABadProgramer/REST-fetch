@@ -11,9 +11,8 @@ import java.security.Principal;
 import java.util.List;
 
 @RestController
+@RequestMapping("api")
 public class RestAPIController {
-
-    ResponseEntity<?> re;
 
     @Autowired
     private final UserService userService;
@@ -22,15 +21,15 @@ public class RestAPIController {
         this.userService = userService;
     }
 
-    @GetMapping("api/list")
+    @GetMapping("/list")
     public ResponseEntity<List<User>> users(){
         return ResponseEntity.status(HttpStatus.OK)
         .body(userService.userList());
     }
 
-    @GetMapping("api/userInfo")
+    @GetMapping("/userInfo")
     public ResponseEntity<User> user(Principal principal){
-        return ResponseEntity.status(HttpStatus.OK)
+        return ResponseEntity.status(HttpStatus.FOUND)
         .body(userService.getUserByName(principal.getName()));
     }
 
@@ -41,37 +40,22 @@ public class RestAPIController {
     }
 
 
-    @PostMapping( "api/add")
+    @PostMapping( "/add")
     public ResponseEntity<?> create(@RequestBody User user) {
-        try {
-            userService.addUser(user);
-            re = new ResponseEntity<>("User added", HttpStatus.OK);
-        } catch (Exception e) {
-            re = new ResponseEntity<>("Unable to add user", HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-        return re;
+        userService.addUser(user);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    @PutMapping("api/edit")
+    @PutMapping("/edit")
     public ResponseEntity<?> update(@RequestBody User user) {
-        try {
-            userService.updateUser(user);
-            re = new ResponseEntity<>("User added", HttpStatus.OK);
-        } catch (Exception e) {
-            re = new ResponseEntity<>("Unable to add user", HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-        return re;
+        userService.updateUser(user);
+        return new ResponseEntity<>(HttpStatus.ACCEPTED);
 
     }
 
-    @DeleteMapping("/api/delete/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> remove(@PathVariable long id){
-        try {
-            userService.deleteUser(id);
-            re = new ResponseEntity<>("User Deleted", HttpStatus.OK);
-        } catch (Exception e) {
-            re = new ResponseEntity<>("Unable to delete user", HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-        return re;
+        userService.deleteUser(id);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

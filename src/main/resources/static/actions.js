@@ -86,8 +86,8 @@ function list() {
                             temp += "<td>" + itemData.age + "</td>"
                             temp += "<td>" + itemData.email + "</td>"
                             temp += "<td>" + role + "</td>"
-                            temp += `<td><a id="editButton" href="/getUser/${itemData.id}" class="btn btn-info active">Edit</a></td>`
-                            temp += `<td><a id="deleteButton" href="/getUser/${itemData.id}"class="btn btn-danger active">Remove</a></td></tr>`;
+                            temp += `<td><a id="editButton" href="/api/getUser/${itemData.id}" class="btn btn-info active">Edit</a></td>`
+                            temp += `<td><a id="deleteButton" href="/api/getUser/${itemData.id}"class="btn btn-danger active">Remove</a></td></tr>`;
                         });
                         document.getElementById('table-body').innerHTML = temp;
 
